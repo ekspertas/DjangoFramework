@@ -2,7 +2,7 @@
     <li><a href="{% url 'products:products' %}">Все</a></li>
     {% for link_item in links_menu %}
         <li><a
-                href="#"
+                href="{% url 'products:category' link_item.pk %}"
                 class="{% if request.resolver_match.url_name == link_item.url %}
                 active
               {% endif %}"
