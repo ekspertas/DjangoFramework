@@ -3,10 +3,12 @@ from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.urls import reverse
 
-from authapp.forms import ShopUserLoginForm
+from authapp.forms import ShopUserEditForm, ShopUserLoginForm, ShopUserRegisterForm, ShopUserEditForm
 
 
 def login(request):
+    title = 'вход'
+
     login_form = ShopUserLoginForm(data=request.POST)
     if request.method == 'POST' and login_form.is_valid():
         username = request.POST.get('username')
@@ -28,21 +30,34 @@ def logout(request):
 
 
 def register(request):
-    pass
-    # if request.method == 'POST':
-    #     register_form = ShopUserRegisterForm(request.POST, request.FILE)
-    #
-    #     if register_form.is_valid():
-    #         register_form.save()
-    #         return HttpResponseRedirect(reverse('index'))
-    # else:
-    #     register_form = ShopUserRegisterForm()
-    #
-    # context = {
-    #     'register_form': register_form
-    # }
-    # return render(request, 'authapp/register.html', context)
+    if request.method == 'POST':
+        register_form = ShopUserRegisterForm(request.POST, request.FILES)
+
+        if register_form.is_valid():
+            register_form.save()
+            return HttpResponseRedirect(reverse('index'))
+    else:
+        register_form = ShopUserRegisterForm()
+    context = {
+        'register_form': register_form
+    }
+    return render(request, 'authapp/register.html', context)
 
 
 def edit(request):
-    pass
+    if request.method == 'POST':
+
+        edit_form = ShopUserEditForm(
+            request.POST, request.FILES, instance=request.user)
+        if edit_form.is_valid():
+            edit_form.save()
+            return HttpResponseRedirect(reverse('auth:edit'))
+
+    else:
+        edit_form = ShopUserEditForm(instance=request.user)
+
+    context = {
+        'edit_form': edit_form
+    }
+
+    return render(request, 'authapp/edit.html', context)
