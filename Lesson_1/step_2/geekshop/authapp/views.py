@@ -19,6 +19,7 @@ def login(request):
             auth.login(request, user)
             return HttpResponseRedirect(reverse('index'))
     context = {
+        'title': title,
         'login_form': login_form
     }
     return render(request, 'authapp/login.html', context)
