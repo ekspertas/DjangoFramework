@@ -7,6 +7,8 @@
     <input class="btn btn-primary" type="submit" value="сохранить">
 </form>
 <button class="btn btn-warning">
-    назад
+    <a href="{% url 'adminapp:user_list' %}">
+        Назад
+    </a>
 </button>
 {% endblock %}
