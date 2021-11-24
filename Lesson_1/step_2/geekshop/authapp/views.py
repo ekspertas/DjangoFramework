@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.urls import reverse
 
-from authapp.forms import ShopUserEditForm, ShopUserLoginForm, ShopUserRegisterForm, ShopUserEditForm
+from authapp.forms import ShopUserLoginForm, ShopUserRegisterForm, ShopUserEditForm
 
 
 def login(request):
