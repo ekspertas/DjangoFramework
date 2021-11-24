@@ -6,7 +6,7 @@ app_name = 'adminapp'
 
 urlpatterns = [
     path('users/create/', admin_views.user_create, name='user_create'),
-    path('users/', admin_views.users, name='user_list'),
+    path('users/', admin_views.UsersListView.as_view(), name='user_list'),
     path('users/update/<int:pk>/', admin_views.user_update, name='user_update'),
     path('users/delete/<int:pk>/', admin_views.user_delete, name='user_delete'),
 
@@ -18,12 +18,12 @@ urlpatterns = [
          admin_views.category_delete, name='category_delete'),
 
     path('products/create/<int:pk>/',
-         admin_views.product_create, name='product_create'),
-    path('products/<int:pk>/', admin_views.products, name='product_list'),
+         admin_views.ProductCreateView.as_view(), name='product_create'),
+    path('products/<int:pk>/', admin_views.ProductsListView.as_view(), name='product_list'),
     path('products/update/<int:pk>/',
-         admin_views.product_update, name='product_update'),
+         admin_views.ProductUpdateView.as_view(), name='product_update'),
     path('products/delete/<int:pk>/',
-         admin_views.product_delete, name='product_delete'),
+         admin_views.ProductDeleteView.as_view(), name='product_delete'),
     path('products/detail/<int:pk>/',
-         admin_views.product_detail, name='product_detail'),
+         admin_views.ProductDetailView.as_view(), name='product_detail'),
 ]
